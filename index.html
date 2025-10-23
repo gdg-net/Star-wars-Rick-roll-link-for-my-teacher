@@ -54,87 +54,40 @@
       font-size: 3em;
       margin-bottom: 10px;
       text-shadow: 0 0 10px #ffe81f;
-    }
-
+    }p
     p {
       font-size: 1.2em;
       margin: 10px auto;
       max-width: 600px;
       line-height: 1.5;
     }
-
     .joke {
       font-style: italic;
       color: #00ffcc;
       margin-top: 20px;
     }
-
     a {
       color: #00aaff;
       text-decoration: none;
       font-weight: bold;
     }
-
     a:hover {
       color: #ff5555;
       text-decoration: underline;
     }
-
     .image-container {
       margin-top: 30px;
     }
-
     img {
       width: 300px;
       border-radius: 10px;
       margin: 10px;
       box-shadow: 0 0 10px #ffe81f;
     }
-
     footer {
       margin-top: 40px;
       font-size: 1em;
       color: #888;
-    }
-
-    /* Fake CAPTCHA */
-    .captcha {
-      display: inline-block;
-      margin-top: 30px;
-      background: #111;
-      padding: 15px 25px;
-      border: 2px solid #ffe81f;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ffe81f;
-    }
-
-    .captcha input {
-      transform: scale(1.5);
-      margin-right: 10px;
-      accent-color: #00ffcc;
-      cursor: pointer;
-    }
-
-    #verification-message {
-      color: #00ffcc;
-      margin-top: 10px;
-      font-weight: bold;
-      display: none;
-    }
-
-    /* Screen overlay (blocks interaction) */
-    .overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 9999;
-      display: none;
-      justify-content: center;
-      align-items: center;
-      color: #00ffcc;
-      font-size: 1.5em;
-      font-weight: bold;
-      text-shadow: 0 0 10px #00ffcc;
     }
   </style>
 </head>
@@ -152,13 +105,6 @@
     <img src="https://starwars.radiohapure.com/lightsaber.png" alt="Lightsaber">
   </div>
 
-  <div class="captcha">
-    <label>
-      <input type="checkbox" id="clankerCheck"> Are you a clanker?
-    </label>
-    <div id="verification-message">Verification complete: You are human.</div>
-  </div>
-
   <p><a href="rickroll.html">Click here to see more about my site</a></p>
 
   <footer>
@@ -167,30 +113,5 @@
     <p>strada, give dexter 5 bucks and quinton 20</p>
   </footer>
 
-  <div class="overlay" id="overlay">
-    Verification in progress...
-  </div>
-
-  <script>
-    const clankerCheck = document.getElementById('clankerCheck');
-    const message = document.getElementById('verification-message');
-    const overlay = document.getElementById('overlay');
-
-    clankerCheck.addEventListener('click', () => {
-      clankerCheck.checked = true;
-      message.style.display = 'block';
-      overlay.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      document.body.style.pointerEvents = 'none';
-      overlay.style.pointerEvents = 'auto';
-
-      setTimeout(() => {
-        message.style.display = 'none';
-        overlay.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        document.body.style.pointerEvents = 'auto';
-      }, 2000);
-    });
-  </script>
 </body>
 </html>
