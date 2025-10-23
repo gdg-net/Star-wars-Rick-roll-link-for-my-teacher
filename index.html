@@ -14,6 +14,7 @@
       padding: 20px;
       overflow-x: hidden;
       position: relative;
+      transition: filter 0.3s ease;
     }
 
     /* Lightsaber handle on the right side */
@@ -28,7 +29,7 @@
       border-left: 3px solid #00ffff;
     }
 
-    h1, p, a, footer {
+    h1, p, a, footer, .captcha {
       opacity: 0;
       transform: translateX(100%);
       animation: slideIn 1.5s forwards;
@@ -38,6 +39,7 @@
     p:nth-of-type(1) { animation-delay: 0.6s; }
     p:nth-of-type(2) { animation-delay: 0.9s; }
     .image-container { animation-delay: 1.2s; }
+    .captcha { animation-delay: 1.4s; }
     a { animation-delay: 1.5s; }
     footer { animation-delay: 1.8s; }
 
@@ -60,7 +62,8 @@
       max-width: 600px;
       line-height: 1.5;
     }
-        .joke {
+
+    .joke {
       font-style: italic;
       color: #00ffcc;
       margin-top: 20px;
@@ -93,6 +96,46 @@
       font-size: 1em;
       color: #888;
     }
+
+    /* Fake CAPTCHA */
+    .captcha {
+      display: inline-block;
+      margin-top: 30px;
+      background: #111;
+      padding: 15px 25px;
+      border: 2px solid #ffe81f;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ffe81f;
+    }
+
+    .captcha input {
+      transform: scale(1.5);
+      margin-right: 10px;
+      accent-color: #00ffcc;
+      cursor: pointer;
+    }
+
+    #verification-message {
+      color: #00ffcc;
+      margin-top: 10px;
+      font-weight: bold;
+      display: none;
+    }
+
+    /* Screen overlay (blocks interaction) */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 9999;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      color: #00ffcc;
+      font-size: 1.5em;
+      font-weight: bold;
+      text-shadow: 0 0 10px #00ffcc;
+    }
   </style>
 </head>
 <body>
@@ -101,11 +144,19 @@
   <h1>Welcome to My Star Wars page!</h1>
   <p>This site was made by <strong>Lucas</strong>.</p>
   <p>Please show this to your 3rd period class, your 2nd period class, and your first period class, and maybe your WIN/INE classes!</p>
-<p>Make a site builder badge NOW</p>
+  <p>Make a site builder badge NOW</p>
   <p class="joke">The teacher told me not to execute Order 66... so I went with Order 67 instead. 😉</p>
+
   <div class="image-container">
     <img src="https://starwars.radiohapure.com/darthvader.jpg" alt="Darth Vader">
     <img src="https://starwars.radiohapure.com/lightsaber.png" alt="Lightsaber">
+  </div>
+
+  <div class="captcha">
+    <label>
+      <input type="checkbox" id="clankerCheck"> Are you a clanker?
+    </label>
+    <div id="verification-message">Verification complete: You are human.</div>
   </div>
 
   <p><a href="rickroll.html">Click here to see more about my site</a></p>
@@ -115,5 +166,31 @@
     <p>Tyler is cool.</p>
     <p>strada, give dexter 5 bucks and quinton 20</p>
   </footer>
+
+  <div class="overlay" id="overlay">
+    Verification in progress...
+  </div>
+
+  <script>
+    const clankerCheck = document.getElementById('clankerCheck');
+    const message = document.getElementById('verification-message');
+    const overlay = document.getElementById('overlay');
+
+    clankerCheck.addEventListener('click', () => {
+      clankerCheck.checked = true;
+      message.style.display = 'block';
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      document.body.style.pointerEvents = 'none';
+      overlay.style.pointerEvents = 'auto';
+
+      setTimeout(() => {
+        message.style.display = 'none';
+        overlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+        document.body.style.pointerEvents = 'auto';
+      }, 2000);
+    });
+  </script>
 </body>
 </html>
